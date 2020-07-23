@@ -5,6 +5,8 @@ import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.By;
+import org.yecht.Data;
+
 import java.util.*;
 
 
@@ -17,7 +19,7 @@ public class SearchResultPage extends PageObject {
     @FindBy(css = ".actions [type='button'].btn-cart")
     private WebElementFacade addToCartButton;
 
-
+    //---------LISTA ELEMENTE GASITE
     @FindBy(css = ".products-grid--max-3-col>li")
     private List<WebElementFacade> searchResultItems;
 
@@ -51,28 +53,24 @@ public class SearchResultPage extends PageObject {
 
 
 
-    public boolean verifyIfProductWasFound(String productName) {
-        return productNameLink.containsOnlyText(productName);
-    }
-
     public void clickAddToCart() {
         clickOn(addToCartButton);
     }
 
 
-    public void searchResultsList (){
+    public boolean findElementInSearchResultList(){
         List<WebElementFacade> searchResultList = findAll(By.cssSelector(".products-grid--max-3-col>li"));
-
         for(WebElementFacade element : searchResultList) {
-            System.out.println(element);
+            if (element == silverDesertNecklace){
+                clickOn(silverDesertNecklace);
+            }
         }
-
+        return true;
     }
 
-    public boolean verifyIfProduct(){
-        searchResultItems.contains(silverDesertNecklace);
-        return true;
 
+    public boolean verifyProductWasFound(String productName){
+        return silverDesertNecklace.containsOnlyText(productName);
     }
 
 
@@ -87,38 +85,6 @@ public class SearchResultPage extends PageObject {
     public void clickAscendingArrowIcon () {
         clickOn(ascendingArrowIcon);
     }
-
-    public Integer getCheapestProductText () {
-        int priceCheap = Integer.valueOf(cheapestProductPrice.getText());
-        return priceCheap;
-    }
-
-    public Integer getMostExpensiveProductText() {
-       int priceExpensive = Integer.valueOf(mostExpensiveProductPrice.getText());
-        return priceExpensive;
-    }
-
-    public int compare(){
-        int priceCheap = Integer.valueOf(cheapestProductPrice.getText());
-        int priceExpensive = Integer.valueOf(mostExpensiveProductPrice.getText());
-
-        if (priceCheap < priceExpensive) {
-
-        }
-            return priceCheap;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

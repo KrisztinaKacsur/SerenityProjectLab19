@@ -26,4 +26,6 @@ public class CartSteps {
     public void proceedToCheckout(){
         cartPage.clickProceedToCheckout();
     }
+
+
 }
